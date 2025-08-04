@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { getNotes } from "../api/notes";
 
 export default function NotesList() {
@@ -9,6 +9,8 @@ export default function NotesList() {
   const [size] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const debounceTimeout = useRef();
 
   const fetchNotes = () => {
     setLoading(true);
@@ -27,7 +29,15 @@ export default function NotesList() {
   useEffect(() => {
     fetchNotes();
     // eslint-disable-next-line
-  }, [page, search]);
+  }, [page, debouncedSearch]);
+
+  useEffect(() => {
+    clearTimeout(debounceTimeout.current);
+    debounceTimeout.current = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 400);
+    return () => clearTimeout(debounceTimeout.current);
+  }, [search]);
 
   if (loading) return <div className="p-8">Loading...</div>;
   if (error) return <div className="p-8 text-red-500">{error}</div>;
