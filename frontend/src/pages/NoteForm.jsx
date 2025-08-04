@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { getNote, createNote, updateNote } from "../api/notes";
 
 export default function NoteForm({ isEdit = false }) {
   const navigate = useNavigate();
@@ -9,10 +10,15 @@ export default function NoteForm({ isEdit = false }) {
   const [error, setError] = useState(null);
 
   React.useEffect(() => {
-    if (isEdit && id) {
-      fetch(`http://localhost:8080/api/v1/notes/${id}`)
-        .then((res) => res.json())
-        .then((data) => setForm(data));
+    if (isEdit && id) { 
+      // fetch(`http://localhost:8080/api/v1/notes/${id}`)
+      //   .then((res) => res.json())
+      //   .then((data) => setForm(data));
+      getNote(id)
+        .then(data => setForm(data))
+        .catch(err => {
+          setError("Failed to load note");
+        });
     }
   }, [isEdit, id]);
 
@@ -24,25 +30,37 @@ export default function NoteForm({ isEdit = false }) {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    const method = isEdit ? "PUT" : "POST";
-    const url = isEdit ? `http://localhost:8080/api/v1/notes/${id}` : "http://localhost:8080/api/v1/notes";
-    fetch(url, {
-      method,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to save note");
-        return res.json();
-      })
+    // const method = isEdit ? "PUT" : "POST";
+    // const url = isEdit ? `http://localhost:8080/api/v1/notes/${id}` : "http://localhost:8080/api/v1/notes";
+    // fetch(url, {
+    //   method,
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(form),
+    // })
+    //   .then((res) => {
+    //     if (!res.ok) throw new Error("Failed to save note");
+    //     return res.json();
+    //   })
+    //   .then(() => {
+    //     setLoading(false);
+    //     navigate("/");
+    //   })
+    //   .catch(() => {
+    //     setError("Failed to save note");
+    //     setLoading(false);
+    //   });
+    const apiCall = isEdit ? updateNote(id, form) : createNote(form);
+    apiCall
       .then(() => {
         setLoading(false);
         navigate("/");
       })
-      .catch(() => {
-        setError("Failed to save note");
+      .catch(err => {
+        setError(err.message || "Failed to save note");
         setLoading(false);
       });
+    // Reset form after submission
+    setForm({ author: "", title: "", content: "" });
   };
 
   return (

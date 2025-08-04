@@ -22,7 +22,7 @@ export default function Sidebar() {
         </div>
         <nav className="flex flex-col gap-4 text-lg">
           <a href="/" className="hover:text-indigo-400 transition-colors">Notes</a>
-          <a href="/new" className="hover:text-indigo-400 transition-colors">New Note</a>
+          {/* <a href="/new" onClick={() => navigate('/new')} className="hover:text-indigo-400 transition-colors">New Note</a> */}
         </nav>
       </aside>
       {/* Overlay for mobile sidebar */}
