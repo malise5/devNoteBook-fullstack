@@ -9,7 +9,7 @@ export async function getNote(id) {
 }
 
 export async function getNotes({ page = 0, size = 10, sort = "createdAt,asc", search = "" } = {}) {
-  let url = `${BASE_URL}?page=${page}&size=${size}&sort=${sort}`;
+  let url = `${BASE_URL}/paged?page=${page}&size=${size}&sort=${sort}`;
   if (search) url += `&search=${encodeURIComponent(search)}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error("Failed to fetch notes list" + search ? ` for search term: ${search}` : "");
