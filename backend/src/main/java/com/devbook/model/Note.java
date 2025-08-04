@@ -29,6 +29,10 @@ public class Note {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
+    @Column(name = "image_url", length = 1000)
+    private String imageUrl;
+
+
     private LocalDateTime createdAt = LocalDateTime.now();
 
     private LocalDateTime updatedAt = LocalDateTime.now();

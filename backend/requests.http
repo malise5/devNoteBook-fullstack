@@ -1,39 +1,29 @@
 ### Register User
-POST http://localhost:8080/api/auth/register
+POST http://localhost:8080/api/v1/notes
 Content-Type: application/json
 
 {
-  "name": "Jane Doe",
-  "email": "bonnie89@ethereal.email",
-  "password": "Password123",
-  "dob": "2000-01-01"
+  "author":"",
+  "title": "My First Note",
+  "content": "This is the content of my first note."
 }
+### Get Notes by Page
+GET http://localhost:8080/api/v1/notes/paged?page=0&size=10&sort=createdAt,asc
 
 
+### Get All Notes
+GET http://localhost:8080/api/v1/notes
 
-### User Login
-POST http://localhost:8080/api/auth/login
+
+### Get Note by ID
+GET http://localhost:8080/api/v1/notes/1
+
+### Update Note by ID
+PUT http://localhost:8080/api/v1/notes/3
 Content-Type: application/json
 
 {
-  "email": "bonnie89@ethereal.email",
-  "password": "Password123"
+  "author": "Amina Khan",
+  "title": "Java batch processing",
+  "content": "Updated content of the note."
 }
-
-
-
-### Log Symptom
-POST http://localhost:8080/api/symptoms/log
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtZSIsInN1YiI6ImJvbm5pZTg5QGV0aGVyZWFsLmVtYWlsIiwiYXVkIjpbInBlcmlvZHBhbGFwcCJdLCJleHAiOjE3NTQxNTA3MzEsIm5iZiI6MTc1NDA2NDMzMSwiaWF0IjoxNzU0MDY0MzMxLCJqdGkiOiI4YmQxMzNiNy1hYjI3LTRiMTUtYjc1ZC01Zjk4NWJkZjUyODYifQ.wcNhi4e0B5C_Qprxy_n36Yfhjl8tlViU_yasijJZGOg
-Content-Type: application/json
-
-{
-  "date": "2025-08-01",
-  "symptom": "headache",
-  "severity": "MODERATE",
-  "note": "Mild cramps in the morning"
-}
-
-### Get Symptoms For Date
-GET http://localhost:8080/api/symptoms?date=2025-08-01
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtZSIsInN1YiI6ImJvbm5pZTg5QGV0aGVyZWFsLmVtYWlsIiwiYXVkIjpbInBlcmlvZHBhbGFwcCJdLCJleHAiOjE3NTQxNTA3MzEsIm5iZiI6MTc1NDA2NDMzMSwiaWF0IjoxNzU0MDY0MzMxLCJqdGkiOiI4YmQxMzNiNy1hYjI3LTRiMTUtYjc1ZC01Zjk4NWJkZjUyODYifQ.wcNhi4e0B5C_Qprxy_n36Yfhjl8tlViU_yasijJZGOg

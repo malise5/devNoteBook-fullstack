@@ -8,6 +8,8 @@ import com.devbook.model.Note;
 import com.devbook.repository.NoteRepository;
 import com.devbook.service.NoteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +29,15 @@ public class NoteServiceImpl implements NoteService {
 
         // Convert saved Note entity back to NoteResponse
         return NoteMapper.toResponse(savedNote);
+    }
+
+    @Override
+    public Page<NoteResponse> getNotes(Pageable pageable) {
+        // Retrieve paginated notes from the repository
+        Page<Note> notesPage = noteRepository.findAll(pageable);
+
+        // Convert Page of Note entities to Page of NoteResponse
+        return notesPage.map(NoteMapper::toResponse);
     }
 
     @Override

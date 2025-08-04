@@ -6,6 +6,8 @@ import com.devbook.serviceImpl.NoteServiceImpl;
 import jakarta.validation.Valid;
 import lombok.Generated;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/notes")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class NoteController {
 
     private final NoteServiceImpl noteServiceImpl;
@@ -21,6 +24,11 @@ public class NoteController {
     @PostMapping
     public ResponseEntity<NoteResponse> createNote(@Valid @RequestBody NoteRequest noteRequest) {
         return ResponseEntity.ok(noteServiceImpl.createNote(noteRequest));
+    }
+
+    @GetMapping("/paged")
+    public ResponseEntity<Page<NoteResponse>> getNotes(Pageable pageable) {
+        return ResponseEntity.ok(noteServiceImpl.getNotes(pageable));
     }
 
     @GetMapping
