@@ -3,6 +3,10 @@ FROM node:24-alpine AS build
 
 WORKDIR /app
 
+# Accept API URL as build-time argument
+ARG REACT_APP_API_URL
+ENV VITE_REACT_APP_API_URL=$REACT_APP_API_URL
+
 # Install dependencies and build the app
 COPY package.json package-lock.json ./
 RUN npm ci
@@ -17,7 +21,7 @@ FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 
 # Remove default nginx config and replace with our own
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 

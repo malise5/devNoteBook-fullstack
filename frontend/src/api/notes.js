@@ -1,6 +1,6 @@
 // Notes API functions
 
-const BASE_URL = "http://localhost:8080/api/v1/notes";
+const BASE_URL = import.meta.env.VITE_REACT_APP_API_URL || "http://localhost:8080/api/v1/notes";
 
 export async function getNote(id) {
   const res = await fetch(`${BASE_URL}/${id}`);
