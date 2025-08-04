@@ -5,6 +5,7 @@ metadata:
 spec:
   selector:
     app: devbook-backend
+    version: blue  # or green, depending on the deployment
   ports:
   - protocol: TCP
     port: 8080

@@ -1,16 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: devbook-backend
+  name: devbook-backend-blue
 spec:
   replicas: 2
   selector:
     matchLabels:
       app: devbook-backend
+      version: blue  # or green, depending on the deployment
   template:
     metadata:
       labels:
         app: devbook-backend
+        version: blue  # or green, depending on the deployment
     spec:
       imagePullSecrets:
       - name: ghcr-secret
