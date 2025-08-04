@@ -90,6 +90,6 @@ jobs:
 
       - name: Build and push frontend image (Frontend)
         run: |
-          docker build -t $IMAGE_FRONTEND:latest -it $IMAGE_FRONTEND:${SHORT_SHA} .
+          docker build -t $IMAGE_FRONTEND:latest -t $IMAGE_FRONTEND:${SHORT_SHA} .
           docker push $IMAGE_FRONTEND:latest
           docker push $IMAGE_FRONTEND:${SHORT_SHA}
