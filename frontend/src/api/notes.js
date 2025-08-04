@@ -4,7 +4,7 @@ const BASE_URL = "http://localhost:8080/api/v1/notes";
 
 export async function getNote(id) {
   const res = await fetch(`${BASE_URL}/${id}`);
-  if (!res.ok) throw new Error("Failed to fetch note");
+  if (!res.ok) throw new Error("Failed to fetch note with Id: " + id);
   return res.json();
 }
 
@@ -12,7 +12,7 @@ export async function getNotes({ page = 0, size = 10, sort = "createdAt,asc", se
   let url = `${BASE_URL}?page=${page}&size=${size}&sort=${sort}`;
   if (search) url += `&search=${encodeURIComponent(search)}`;
   const res = await fetch(url);
-  if (!res.ok) throw new Error("Failed to fetch notes");
+  if (!res.ok) throw new Error("Failed to fetch notes list" + search ? ` for search term: ${search}` : "");
   return res.json();
 }
 
