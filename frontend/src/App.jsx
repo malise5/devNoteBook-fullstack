@@ -7,7 +7,15 @@ import NoteDetails from "./pages/NoteDetails";
 import NoteForm from "./pages/NoteForm";
 import RightSidebar from "./components/RightSidebar";
 
+import React, { useRef } from "react";
+
 function App() {
+  const notesListRef = useRef();
+  const handleRefresh = () => {
+    if (notesListRef.current && notesListRef.current.refreshNotes) {
+      notesListRef.current.refreshNotes();
+    }
+  };
   return (
     <Router>
       <div className="flex min-h-screen w-screen bg-gray-50 dark:bg-gray-900">
@@ -17,13 +25,13 @@ function App() {
           <div className="flex flex-1 h-full w-full">
             <main className="flex-1 h-full min-h-0 w-full">
               <Routes>
-                <Route path="/" element={<NotesList />} />
+                <Route path="/" element={<NotesList ref={notesListRef} />} />
                 <Route path="/notes/:id" element={<NoteDetails />} />
                 <Route path="/new" element={<NoteForm />} />
                 <Route path="/edit/:id" element={<NoteForm isEdit={true} />} />
               </Routes>
             </main>
-            <RightSidebar />
+            <RightSidebar onRefresh={handleRefresh} />
           </div>
         </div>
       </div>

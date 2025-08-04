@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useImperativeHandle, forwardRef } from "react";
 import { getNotes } from "../api/notes";
 
-export default function NotesList() {
+const NotesList = forwardRef(function NotesList(props, ref) {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -30,6 +30,10 @@ export default function NotesList() {
     fetchNotes();
     // eslint-disable-next-line
   }, [page, debouncedSearch]);
+
+  useImperativeHandle(ref, () => ({
+    refreshNotes: fetchNotes
+  }));
 
   useEffect(() => {
     clearTimeout(debounceTimeout.current);
@@ -82,4 +86,6 @@ export default function NotesList() {
       </div>
     </div>
   );
-}
+});
+
+export default NotesList;

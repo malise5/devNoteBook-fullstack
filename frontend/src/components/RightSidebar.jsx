@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function RightSidebar() {
+export default function RightSidebar({ onRefresh }) {
+  const navigate = useNavigate();
   return (
     <aside className="hidden lg:flex flex-col w-80 h-full p-6 bg-gradient-to-br from-white via-gray-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-indigo-950 border-l border-gray-200 dark:border-gray-800 shadow-xl">
       {/* User Card */}
@@ -16,11 +18,17 @@ export default function RightSidebar() {
       <div className="mb-8">
         <h3 className="font-semibold mb-3 text-gray-700 dark:text-gray-300">Quick Actions</h3>
         <div className="flex flex-col gap-3">
-          <button className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:bg-indigo-700 transition">
+          <button
+            className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:bg-indigo-700 transition"
+            onClick={() => navigate('/new')}
+          >
             <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
             Create Note
           </button>
-          <button className="flex items-center gap-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg shadow hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+          <button
+            className="flex items-center gap-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg shadow hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+            onClick={onRefresh}
+          >
             <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M4 4v16h16V4H4zm8 8v4m0-4V8m0 4h4m-4 0H8"/></svg>
             Refresh List
           </button>
