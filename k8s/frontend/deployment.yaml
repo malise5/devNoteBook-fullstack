@@ -18,8 +18,8 @@ spec:
       containers:
       - name: frontend
         # image: ghcr.io/malise5/devbook-frontend:latest
-        # image: docker.io/malise/devbook-frontend:latest
-        image: docker.io/malise/devbook-frontend:${IMAGE_TAG}
+        image: docker.io/malise/devbook-frontend:latest
+        # image: docker.io/malise/devbook-frontend:${IMAGE_TAG}
         ports:
         - containerPort: 80
         env:
