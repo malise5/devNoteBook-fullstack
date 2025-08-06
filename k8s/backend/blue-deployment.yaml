@@ -16,7 +16,7 @@ spec:
     spec:
       imagePullSecrets:
       # - name: ghcr-secret
-      - name: dockerhub-secret
+      - name: regcred
       containers:
       - name: backend
         # image: ghcr.io/malise5/devbook-backend:latest
