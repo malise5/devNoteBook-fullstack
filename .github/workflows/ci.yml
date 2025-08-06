@@ -71,9 +71,9 @@ jobs:
 
       - name: Build and push frontend image
         run: |
-          docker build -t $IMAGE_FRONTEND:latest -t $IMAGE_FRONTEND:${IMAGE_TAG} .
-          docker push $IMAGE_FRONTEND:latest
-          docker push $IMAGE_FRONTEND:${IMAGE_TAG}
+          docker build -t $IMAGE_BACKEND:latest -t $IMAGE_BACKEND:${IMAGE_TAG} .
+          docker push $IMAGE_BACKEND:latest
+          docker push $IMAGE_BACKEND:${IMAGE_TAG}
 
   
   build-frontend:
