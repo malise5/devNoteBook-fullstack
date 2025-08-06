@@ -15,10 +15,12 @@ spec:
         version: green  # or blue, depending on the deployment
     spec:
       imagePullSecrets:
-      - name: ghcr-secret
+      # - name: ghcr-secret
+      - name: regcred
       containers:
       - name: backend
-        image: ghcr.io/malise5/devbook-backend:latest
+        # image: ghcr.io/malise5/devbook-backend:latest
+        image: docker.io/malise/devbook-backend:latest
         ports:
         - containerPort: 8080
         env:
@@ -52,8 +54,8 @@ spec:
         
         resources:
           requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
             memory: "512Mi"
             cpu: "500m"
-          limits:
-            memory: "1Gi"
-            cpu: "1"
