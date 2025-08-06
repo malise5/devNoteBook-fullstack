@@ -13,10 +13,14 @@ spec:
         app: devbook-frontend
     spec:
       imagePullSecrets:
-      - name: ghcr-secret
+      # - name: ghcr-secret
+      - name: dockerhub-secret
+      restartPolicy: Always
       containers:
       - name: frontend
-        image: ghcr.io/malise5/devbook-frontend:latest
+        # image: ghcr.io/malise5/devbook-frontend:latest
+        # image: docker.io/malise/devbook-frontend:latest
+        image: docker.io/malise/devbook-frontend:${IMAGE_TAG}
         ports:
         - containerPort: 80
         env:

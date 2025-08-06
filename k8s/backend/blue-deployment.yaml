@@ -15,10 +15,13 @@ spec:
         version: blue  # or green, depending on the deployment
     spec:
       imagePullSecrets:
-      - name: ghcr-secret
+      # - name: ghcr-secret
+      - name: dockerhub-secret
+      restartPolicy: Always
       containers:
       - name: backend
-        image: ghcr.io/malise5/devbook-backend:latest
+        # image: ghcr.io/malise5/devbook-backend:latest
+        image: docker.io/malise/devbook-backend:latest
         ports:
         - containerPort: 8080
         env:
