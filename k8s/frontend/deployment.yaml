@@ -15,7 +15,6 @@ spec:
       imagePullSecrets:
       # - name: ghcr-secret
       - name: dockerhub-secret
-      restartPolicy: Always
       containers:
       - name: frontend
         # image: ghcr.io/malise5/devbook-frontend:latest
