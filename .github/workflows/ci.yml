@@ -54,7 +54,7 @@ jobs:
           SHORT_SHA=${GITHUB_SHA::7}
           TAG="${TIMESTAMP}-${SHORT_SHA}"
           echo "IMAGE_TAG=$TAG" >> $GITHUB_ENV
-          ECHO "Generated image tag: $TAG"
+          echo "Generated image tag: $TAG"
 
       # - name: Log in to Github Container Registry
       #   run: echo "${{ secrets.GH_PAT }}" | docker login ghcr.io -u ${{ secrets.GH_USERNAME }} --password-stdin
